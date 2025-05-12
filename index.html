@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keshav Mittal | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3498db;
+            --primary-dark: #2980b9;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --accent: #e74c3c;
+            --gray: #95a5a6;
+            --bg-color: #f9f9f9;
+            --text-color: #333;
+            --card-bg: white;
+            --border-color: #e0e0e0;
+        }
+        
+        [data-theme="dark"] {
+            --primary: #4299e1;
+            --primary-dark: #3182ce;
+            --dark: #1a202c;
+            --light: #4a5568;
+            --accent: #f56565;
+            --gray: #a0aec0;
+            --bg-color: #1a202c;
+            --text-color: #f7fafc;
+            --card-bg: #2d3748;
+            --border-color: #4a5568;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--dark);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--dark), var(--primary));
+            color: white;
+            padding: 100px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 60px;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-3px);
+        }
+        
+        /* Main Content */
+        main {
+            padding: 50px 0;
+        }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Sidebar */
+        .sidebar, .main-content {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+        
+        /* Section Headers */
+        h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light);
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        h2 i {
+            margin-right: 10px;
+        }
+        
+        /* Contact Info */
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--primary);
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Skills */
+        .skills-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .skill-category {
+            margin-bottom: 20px;
+        }
+        
+        .skill-category h3 {
+            margin-bottom: 10px;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+        
+        .skill-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .skill-tag {
+            background-color: var(--light);
+            color: var(--dark);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .skill-tag i {
+            margin-right: 5px;
+            color: var(--primary);
+        }
+        
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--light);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            border: 2px solid var(--card-bg);
+        }
+        
+        .timeline-date {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .timeline-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--text-color);
+        }
+        
+        .timeline-subtitle {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        /* Projects */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .project-card {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            background-color: var(--card-bg);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .project-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .project-content {
+            padding: 15px;
+        }
+        
+        .project-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+        
+        .project-description {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 10px;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        
+        .project-tag {
+            background-color: var(--light);
+            color: var(--dark);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+        }
+        
+        /* Certifications */
+        .certification-card {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: var(--light);
+        }
+        
+        .certification-logo {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+        }
+        
+        .certification-content {
+            flex: 1;
+        }
+        
+        .certification-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .certification-issuer {
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        /* Interests */
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        
+        .interest-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: var(--light);
+            text-align: center;
+        }
+        
+        .interest-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9rem;
+        }
+        
+        /* Buttons */
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        
+        .download-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+        
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        section {
+            animation: fadeIn 1s ease forwards;
+            opacity: 0;
+        }
+        
+        /* Section spacing */
+        section:not(:last-child) {
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">Keshav Mittal</a>
+            <div class="nav-links">
+                <a href="#about"><i class="fas fa-user"></i> About</a>
+                <a href="#skills"><i class="fas fa-code"></i> Skills</a>
+                
+                <a href="#projects"><i class="fas fa-project-diagram"></i> Projects</a>
+                <a href="#certifications"><i class="fas fa-certificate"></i> Certifications</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Header -->
+    <header id="about">
+        <div class="header-content">
+            
+            <h1>Keshav Mittal</h1>
+            <p class="tagline">Innovative Web Designer & B.Tech CSE Student at South Asian University</p>
+            <div class="social-links">
+                <a href="https://github.com/Keshavm15" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/keshav-mittal-a29642346/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:mittalkeshav1506@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="container">
+        <div class="grid-container">
+            <aside class="sidebar">
+                <section class="contact-info">
+                    <h2><i class="fas fa-id-card"></i> Contact</h2>
+                    <p><i class="fas fa-envelope"></i> mittalkeshav1506@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +91 8198953129</p>
+                    <p><i class="fas fa-map-marker-alt"></i> New Delhi, India</p>
+                    <p><i class="fas fa-globe"></i> github.com/Keshavm15</p>
+                </section>
+                
+                <section class="education">
+                    <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">Present</div>
+                            <div class="timeline-title">South Asian University</div>
+                            <div class="timeline-subtitle">B.Tech in Computer Science</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">Graduated</div>
+                            <div class="timeline-title">St. Thomas School (ICSE)</div>
+                            <div class="timeline-subtitle">12th Grade: 93.4%</div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="languages">
+                    <h2><i class="fas fa-language"></i> Languages</h2>
+                    <div class="skills-container">
+                        <div class="skill-category">
+                            <h3>Professional</h3>
+                            <div class="skill-items">
+                                <span class="skill-tag"><i class="fas fa-check"></i> English</span>
+                                <span class="skill-tag"><i class="fas fa-check"></i> Hindi</span>
+                                <span class="skill-tag"><i class="fas fa-check"></i> Punjabi</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <a href="#" class="download-btn">
+                    <i class="fas fa-download"></i> Download CV
+                </a>
+            </aside>
+            
+            <div class="main-content">
+                <section id="about">
+                    <h2><i class="fas fa-user"></i> About Me</h2>
+                    <p>Innovative and passionate Computer Science student with a strong foundation in programming and web development. Experienced in building responsive websites and applications using modern technologies. Enthusiastic about problem-solving, data structures, and creating elegant solutions to complex challenges.</p>
+                </section>
+                
+                <section id="skills">
+                    <h2><i class="fas fa-code"></i> Technical Skills</h2>
+                    <div class="skills-container">
+                        <div class="skill-category">
+                            <h3>Programming Languages</h3>
+                            <div class="skill-items">
+                                <span class="skill-tag"><i class="fab fa-java"></i> Java</span>
+                                <span class="skill-tag"><i class="fas fa-c"></i> C/C++</span>
+                                <span class="skill-tag"><i class="fab fa-python"></i> Python</span>
+                                <span class="skill-tag"><i class="fab fa-js"></i> JavaScript</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h3>Web Development</h3>
+                            <div class="skill-items">
+                                <span class="skill-tag"><i class="fab fa-html5"></i> HTML5</span>
+                                <span class="skill-tag"><i class="fab fa-css3"></i> CSS3</span>
+                                <span class="skill-tag"><i class="fab fa-node-js"></i> Node.js</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h3>Tools & Technologies</h3>
+                            <div class="skill-items">
+                                <span class="skill-tag"><i class="fab fa-git"></i> Git/GitHub</span>
+                                <span class="skill-tag"><i class="fas fa-code"></i> VS Code</span>
+                                <span class="skill-tag"><i class="fas fa-database"></i> Data Structures</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="projects">
+                    <h2><i class="fas fa-project-diagram"></i> Projects</h2>
+                    <div class="project-grid">
+                        <div class="project-card">
+                            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Portfolio Website" class="project-img">
+                            <div class="project-content">
+                                <div class="project-title">Responsive Portfolio Website</div>
+                                <div class="project-description">A personal portfolio website showcasing my skills and projects with responsive design.</div>
+                                <div class="project-tags">
+                                    <span class="project-tag">HTML</span>
+                                    <span class="project-tag">CSS</span>
+                                    <span class="project-tag">JavaScript</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Directory Management" class="project-img">
+                            <div class="project-content">
+                                <div class="project-title">Directory Management System</div>
+                                <div class="project-description">Implemented using hashing and linked lists in C for efficient data organization.</div>
+                                <div class="project-tags">
+                                    <span class="project-tag">C</span>
+                                    <span class="project-tag">Data Structures</span>
+                                </div>
+                            </div>
+                        </div>
+                        <section id="certifications">
+                            <h2><i class="fas fa-certificate"></i> Certifications</h2>
+                            <div class="certification-card">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Harvard_University_logo.svg/1200px-Harvard_University_logo.svg.png" alt="Harvard CS50" class="certification-logo">
+                                <div class="certification-content">
+                                    <div class="certification-title">CS50x: Introduction to Computer Science</div>
+                                    <div class="certification-issuer">Harvard University</div>
+                                    <p>Comprehensive introduction to computer science covering algorithms, data structures, web development, and more. Learned C, Python, SQL, JavaScript, and frameworks like Flask.</p>
+                                </div>
+                            </div>
+                        </section>
+                
+                
+                
+                <section id="interests">
+                    <h2><i class="fas fa-heart"></i> Interests & Activities</h2>
+                    <div class="interests-grid">
+                        <div class="interest-card">
+                            <div class="interest-icon"><i class="fas fa-chess"></i></div>
+                            <div>Chess</div>
+                        </div>
+                        <div class="interest-card">
+                            <div class="interest-icon"><i class="fas fa-table-tennis"></i></div>
+                            <div>Table Tennis</div>
+                        </div>
+                        
+                        <div class="interest-card">
+                            <div class="interest-icon"><i class="fas fa-users"></i></div>
+                            <div>Leadership</div>
+                        </div>
+                    
+                        <div class="interest-card">
+                            <div class="interest-icon"><i class="fab fa-github"></i></div>
+                            <div>Open Source</div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Keshav Mittal. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <button id="theme-toggle" class="theme-toggle">
+        <i class="fas fa-moon"></i>
+        <span>Dark Mode</span>
+    </button>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Theme toggle functionality
+            const themeToggle = document.getElementById('theme-toggle');
+            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+            const currentTheme = localStorage.getItem('theme');
+            
+            // Check for saved theme preference or use system preference
+            if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                updateToggleButton(true);
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                updateToggleButton(false);
+            }
+            
+            // Toggle theme on button click
+            themeToggle.addEventListener('click', function() {
+                const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                if (isDark) {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                    localStorage.setItem('theme', 'light');
+                    updateToggleButton(false);
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                    updateToggleButton(true);
+                }
+            });
+            
+            // Update toggle button text and icon
+            function updateToggleButton(isDark) {
+                if (isDark) {
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i><span>Light Mode</span>';
+                } else {
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i><span>Dark Mode</span>';
+                }
+            }
+            
+            // Animate sections on scroll
+            const sections = document.querySelectorAll('section');
+            sections.forEach((section, index) => {
+                section.style.animationDelay = `${index * 0.3}s`;
+            });
+            
+            // Smooth scrolling for navigation
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
